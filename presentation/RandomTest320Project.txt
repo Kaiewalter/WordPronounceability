@@ -1,0 +1,29 @@
+
+# Problem statement
+- We want to improve at classifying "words" as being pronounceable or not
+- We will measure our progress by the percentage of words correctly classified
+- Based on our database of a literal dictionary and randomly-ish generated non-pronounceable words
+
+# Methodology
+Train several different models on our dataset, trying to teach them what "pronounceable" words look like
+This will include a manually designed heuristic and different ML models
+
+## Input Formulation (ML Models)
+We need to transform words into input vectors, since we need to have quantifiable data. 
+
+Since we need to store the bigrams of the words, and we care about order, we decided to define the features of our vectors as a list of all possible bigrams within the english alphabet. This results in a 26*26 = 676-dimensional space. We will not be able to encode the order of the bigrams, because any meaningful encoding of this would result in either difficulty plotting the data or skewed data. For example, if the first bigram in the word was given a value of 1, the second was given a value of 2, et cetera, then the feature vectors of longer words would become further and further from the origin in the dimensions of their later bigrams.
+
+If our model seems to be less accurate than we would like, we will experiment with finding a way to encode the order.
+
+
+### For example, 
+Our feature vector will take the following shape:
+`["aa": int, "ab": int, "ac": int, "ad": int .. "zz": int]`
+
+So for a word like "abba", which contains the bigrams `["ab", "bb", "ba"]`,
+Our feature vector would be:
+
+`["aa": 0, "ab": 1, "ac": 0 ... "ba": 1, "bb": 1, "bc": 0 ...]`
+
+
+
